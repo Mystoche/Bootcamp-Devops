@@ -1,0 +1,13 @@
+version: « 3,9 »
+
+services:
+  postgres:
+    image: postgres:14-alpin
+    ports:
+      - 5432:5432
+    tomes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environnement:
+      - POSTGRES_PASSWORD=sophia2
+      - POSTGRES_USER=test
+      - POSTGRES_DB=testbd
