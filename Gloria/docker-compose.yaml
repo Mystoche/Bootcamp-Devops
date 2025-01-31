@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  symfony:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      APP_ENV: dev
+      DATABASE_URL: postgresql://postgres:password@db:5432/symfony
+    volumes:
+      - .:/var/www/html
+    networks:
+      - symfony_network
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: symfony
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - symfony_network
+
+volumes:
+  postgres_data:
+
+networks:
+  symfony_network:
